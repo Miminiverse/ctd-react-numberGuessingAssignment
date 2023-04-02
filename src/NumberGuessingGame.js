@@ -3,17 +3,16 @@ import GuessControl from "./GuessControl";
 import GuessMessage from "./GuessMessage";
 import GameOver from "./GameOver";
 
-function getRandomNumber() {
-  return Math.floor(Math.random() * 100) + 1;
-}
 
 const MAX_ATTEMPTS = 4;
 
+const getRandomNumber = Math.floor(Math.random() * 100) + 1
 
 export default function NumberGuessingGame  () {
   const [currentGuess, setCurrentGuess] = useState("");
+  const [latestGuess, setLatestGuess] = useState("");
   const [numberOfGuesses, setNumberOfGuesses] = useState(0);
-  const [numberToGuess, setNumberToGuess] = useState(getRandomNumber());
+  const [numberToGuess, setNumberToGuess] = useState(getRandomNumber);
   const [isCorrectGuess, setIsCorrectGuess] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -21,22 +20,22 @@ export default function NumberGuessingGame  () {
 
   const handleGuess = (e) => {
     e.preventDefault();
-    if (currentGuess === numberToGuess) {
+    if (Number(currentGuess) === numberToGuess) {
       setIsGameOver(true);
       setIsCorrectGuess(true);
     }
     else {
       setShowHint(true);
+      setLatestGuess(currentGuess);
       if (numberOfGuesses === MAX_ATTEMPTS) {
         setIsGameOver(true);
       }
     }
     setNumberOfGuesses(numberOfGuesses + 1);
-
   }
 
   const onReset = () => {
-    setNumberToGuess(getRandomNumber());
+    setNumberToGuess(getRandomNumber);
     setCurrentGuess("");
     setNumberOfGuesses(0);
     setIsCorrectGuess(false);
@@ -59,10 +58,8 @@ export default function NumberGuessingGame  () {
         />
         {showHint ? 
         <GuessMessage
-            currentGuess={currentGuess} 
+            latestGuess={latestGuess}
             numberToGuess={numberToGuess}
-            numberOfGuesses={numberOfGuesses}
-            showHint={showHint}
           /> 
           : null}
 

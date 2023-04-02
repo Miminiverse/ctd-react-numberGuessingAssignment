@@ -1,13 +1,11 @@
 import React from "react";
 import Button from "./Button";
 
-export default function GuessControl ({isGameOver, setShowHint, onGuess, currentGuess, setCurrentGuess}) {
+export default function GuessControl ({isGameOver, onGuess, currentGuess, setCurrentGuess}) {
 
   const handleInputChange = (event) =>  {
-    setCurrentGuess(Number(event.target.value));
-    setShowHint(false)
+    setCurrentGuess(event.target.value);
   }
-
     return (
       <div>
         <input
