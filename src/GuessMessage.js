@@ -1,6 +1,9 @@
-function getGuessMessage(guess, numberToGuess) {
-  const distanceApart = Math.abs(numberToGuess - guess);
-  if (guess < numberToGuess) {
+
+
+function getGuessMessage(latestGuess, numberToGuess) {
+  const distanceApart = Math.abs(numberToGuess - latestGuess);
+
+  if (latestGuess < numberToGuess) {
     if (distanceApart > 10) {
       return "Your guess was well below the number.";
     } else {
@@ -15,11 +18,11 @@ function getGuessMessage(guess, numberToGuess) {
   }
 }
 
-function GuessMessage({ guess, numberToGuess, numberOfGuesses }) {
+function GuessMessage({ latestGuess, numberToGuess}) {
+
   return (
     <div>
-      {guess && <p>{getGuessMessage(guess, numberToGuess)}</p>}
-      <p>Guesses so far: {numberOfGuesses}</p>
+      <p>{getGuessMessage(latestGuess, numberToGuess)}</p>
     </div>
   );
 }
